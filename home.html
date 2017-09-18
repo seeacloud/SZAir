@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>考勤管理系统</title>
+    <link rel="stylesheet" href="css/home.css"/>
+</head>
+<body>
+<div id="app">
+    <div class="sec">
+        <h5>消息</h5>
+        <div class="note-group">
+            <div v-for="(note,index) in notes" :key="index" class="note-item">
+                <span class="note-content">{{note.title}}</span>
+                <a :href="note.link" class="note-link">详情</a>
+            </div>
+        </div>
+    </div>
+
+    <h5>常用链接</h5>
+    <div class="sec">
+        <div class="link-group">
+            <div class="link-item">
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script src="js/vue.min.js"></script>
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            notes: [
+                {title: '深航考勤管理系统功能升级，请各位同事尽快更新', link: ''},
+                {title: '深航考勤管理系统功能升级，请各位同事尽快更新', link: ''},
+                {title: '深航考勤管理系统功能升级，请各位同事尽快更新', link: ''},
+                {title: '深航考勤管理系统功能升级，请各位同事尽快更新', link: ''},
+                {title: '深航考勤管理系统功能升级，请各位同事尽快更新', link: ''}
+            ]
+        }
+    })
+</script>
+</body>
+</html>

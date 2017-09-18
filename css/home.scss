@@ -1,0 +1,74 @@
+
+@import "normalize";
+$red: #d40924;
+
+body{
+  background: #eee;
+  padding: 20px;
+}
+
+a{
+  text-decoration: none;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+  margin: 0;
+}
+
+h1 {
+  font-size: 36px;
+}
+
+h2 {
+  font-size: 32px;
+  margin: 10px 0;
+}
+
+h3 {
+  font-size: 28px;
+  margin: 10px 0;
+}
+
+h4 {
+  font-size: 24px;
+}
+
+h5 {
+  font-size: 18px;
+}
+
+h6 {
+  font-size: 14px;
+}
+.note-group
+{
+  background: #fff;
+  padding: 20px;
+}
+
+.note-item
+{
+  height: 40px;
+  line-height: 40px;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
+}
+.note-item:hover
+{
+  color: $red;
+}
+.note-link
+{
+  float: right;
+  font-size: 14px;
+}
+
+.note-link:hover
+{
+  color: $red;
+}
+
+.sec
+{
+  margin-bottom: 20px;
+}

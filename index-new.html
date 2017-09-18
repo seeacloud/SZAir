@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>考勤管理系统</title>
+    <link rel="stylesheet" href="css/indexStyle.css"/>
+    <link rel="stylesheet" href="iconfont/iconfont.css"/>
+</head>
+<body>
+
+<div id="app">
+    <div class="status-bar">
+        <i class="iconfont szair-logo">&#xe610;</i> <span class="company-name">深圳航空有限责任公司考勤管理系统</span>
+
+        <div class="user-info">
+            <i class="iconfont user-icon">&#xe6c9;</i>
+            <span class="user-name">屈鹏</span>
+            <a href="">退出</a>
+        </div>
+    </div>
+    <div class="main-con" id="main-con">
+        <iframe src="home.html" id="iframe" name="myiframe" frameborder="0"></iframe>
+
+        </iframe>
+
+        <div class="side-menu">
+
+            <div v-for="(item, index) in menuItems" class="m-item" :key="index" :id="item.sID"
+                 @mouseenter="mouseOverMenuItem($event, item.sID)" @mouseleave="mLeave()" @click="mClick(item.sID)">
+                <a :href="item.link" target="myiframe" class="a-main">
+                    <i class="iconfont" v-html="item.code"></i>
+                    <span class="m-title">{{item.name}}</span>
+                </a>
+
+                <div class="sub-menu" v-show="subID===item.sID">
+                    <div v-for="(group, index) in item.subgroups" :key="index" class="sub-group">
+                        <div v-for="(sitem, index) in group" :key="index" class="a-con">
+                            <a :href="sitem.l" class="a-sub" target="myiframe">{{sitem.n}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/jquery1.12.1.min.js"></script>
+<script src="js/vue.min.js"></script>
+
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            subID: '',
+            activeID: '',
+            menuItems: [
+                {
+                    name: '组织日常管理', code: '&#xe688;', link: 'home.html', sID: 'zzrcgl', subgroups: [
+                    [
+                        {n: '产品管理', l: ''},
+                        {n: '产品列表', l: 'home.html'},
+                        {n: '原料采购订单', l: 'home.html'}
+                    ]
+                ]
+                },
+                {
+                    name: '日常考勤', code: '&#xe619;', link: 'home.html', sID: 'rckq', subgroups: [
+                    [
+                        {n: '打卡记录', l: ''},
+                        {n: '补签卡', l: 'home.html'},
+                        {n: '考勤记录', l: 'home.html'},
+                        {n: '加班单', l: 'home.html'},
+                        {n: '考勤计算', l: 'home.html'}
+                    ]
+                ]
+                },
+                {
+                    name: '考勤业务设置', code: '&#xe62c;', link: 'home.html', sID: 'kqywsz', subgroups: [
+                    [
+                        {n: '考勤项目', l: ''},
+                        {n: '考勤档案', l: 'home.html'},
+                        {n: '考勤制度', l: 'home.html'}
+                    ]
+                ]
+                },
+                {
+                    name: '考勤管控', code: '&#xe60a;', link: 'home.html', sID: 'kqgk', subgroups: [
+                    [
+                        {n: '个人综合工时参数设置', l: ''},
+                        {n: '工时制度', l: 'home.html'},
+                        {n: '加班额度参数设置', l: 'home.html'},
+                        {n: '加班参数申请', l: 'home.html'},
+                        {n: '加班超额申请单', l: 'home.html'},
+                        {n: '加班授权单', l: 'home.html'}
+                    ]
+                ]
+                },
+                {
+                    name: '排班管理', code: '&#xe61e;', link: 'home.html', sID: 'pbgl', subgroups: [
+                    [
+                        {n: '取卡规则', l: ''},
+                        {n: '班次设置', l: 'home.html'},
+                        {n: '班次修改', l: 'home.html'},
+                        {n: '排班列表', l: 'home.html'},
+                        {n: '排班向导', l: 'home.html'},
+                        {n: '法定排班申请', l: 'home.html'}
+                    ]
+                ]
+                },
+                {
+                    name: '考勤数据设置', code: '&#xe63b;', link: 'home.html', sID: 'kqsjsz', subgroups: [
+                    [
+                        {n: '加班原因', l: ''},
+                        {n: '加班类型', l: 'home.html'},
+                        {n: '加班补偿方式', l: 'home.html'},
+                        {n: '补签卡原因', l: 'home.html'},
+                        {n: '考勤设备', l: 'home.html'},
+                        {n: '考勤周期', l: 'home.html'}
+                    ]
+                ]
+                },
+                {
+                    name: '人事数据设置', code: '&#xe62d;', link: 'home.html', sID: 'rssjsz', subgroups: [
+                    [
+                        {n: '组织基础数据', l: ''},
+                        {n: '职位基础数据', l: 'home.html'},
+                        {n: '员工基础数据', l: 'home.html'},
+                        {n: '用户', l: 'home.html'}
+                    ]
+                ]
+                },
+                {
+                    name: '后台事务', code: '&#xe655;', link: 'home.html', sID: 'htsw', subgroups: [
+                    [
+                        {n: '事务管理', l: ''},
+                        {n: '系统参数', l: 'home.html'},
+                        {n: '编码规则', l: 'home.html'}
+                    ]
+                ]
+                },
+                {
+                    name: '权限管理', code: '&#xe61b;', link: 'home.html', sID: 'qxgl', subgroups: [
+                    [
+                        {n: '权限项配置', l: ''}
+
+                    ]
+                ]
+                },
+                {
+                    name: '工作流', code: '&#xe60e;', link: 'home.html', sID: 'gzl', subgroups: [
+                    [
+                        {n: '代办任务', l: ''},
+                        {n: '流程定义', l: ''},
+                        {n: '历史任务', l: ''},
+                        {n: '流程实例', l: ''}
+
+                    ]
+                ]
+                },
+                {
+                    name: '报表管理', code: '&#xe675;', link: 'home.html', sID: 'bbgl', subgroups: [
+                    [
+                        {n: '夜班津贴报表', l: ''},
+                        {n: '考勤异常报表', l: ''},
+                        {n: '考勤记录报表', l: ''},
+                        {n: '工时统计报表', l: ''},
+                        {n: '工时汇总报表', l: ''}
+
+                    ]
+                ]
+                },
+
+            ]
+        },
+        methods: {
+            mLeave: function () {
+                this.subID = ''
+            },
+            mClick: function (mID) {
+                this.activeID = mID
+                console.log('active id:', this.activeID)
+                $('.m-item').removeClass('m-item-active')
+                $('#' + this.activeID).addClass('m-item-active')
+            },
+            mouseOverMenuItem: function (evt, sID) {
+                this.subID = sID
+                subGroups = $(evt.target).find('.sub-group')
+                var hAry = []
+
+                function getMax(ary) {
+                    var max = 0
+                    for (var k = 0; k < ary.length; k++) {
+                        if (ary[k] > max) {
+                            max = ary[k]
+                        }
+                    }
+                    return (max)
+                }
+
+                setTimeout(function () {
+                    for (var i = 0; i < subGroups.length; i++) {
+                        hAry.push($(subGroups[i]).height())
+                    }
+                    for (var j = 0; j < subGroups.length; j++) {
+                        subGroups[j].style.height = getMax(hAry) + 'px'
+                    }
+                }, 10)
+
+            }
+        }
+    })
+</script>
+
+<script>
+    $(function () {
+
+        // 设置主容器高度等于屏幕高度
+        $('#main-con').height($(document).height()-50 + 'px')
+
+        //设置iframe的宽度和高
+        $('#iframe').height($(document).height() -50+ 'px')
+        $('#iframe').width($(document).width() - 160 + 'px')
+
+        //窗口尺寸改变时，重置容器和iframe尺寸
+        $(window).on('resize', function () {
+            $('#main-con').height($(document).height() + 'px')
+            $('#iframe').height($(document).height() + 'px')
+            $('#iframe').width($(document).width() - 100 + 'px')
+        })
+
+        //设置子菜单的尺寸
+        var subMenus = $('.sub-menu')
+        var subGroupNum = []
+        for (var i = 0; i < subMenus.length; i++) {
+            var n = $(subMenus[i]).find('.sub-group').length
+            subGroupNum.push(n)
+            console.log('num is:', n)
+        }
+
+        for (var i = 0; i < subMenus.length; i++) {
+            $(subMenus[i]).width(subGroupNum[i] * 151 + 'px')
+        }
+
+//        设置菜单底对齐
+//        $('#stock .sub-menu').addClass('align-btm')
+//        $('#report .sub-menu').addClass('align-btm')
+//        $('#notice .sub-menu').addClass('align-btm')
+    })
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
